@@ -19,7 +19,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <revision>1.0-SNAPSHOT</revision>
-
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <querydsl.version>5.0.0</querydsl.version>
+        <cloud.version>2021.0.4</cloud.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -27,4 +29,24 @@
         <version>2.7.5</version>
     </parent>
     <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>queydsl-core</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
