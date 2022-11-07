@@ -1,8 +1,11 @@
 package io.qifan.microservice.product.controller;
 
 import io.qifan.microservice.api.product.request.GoodsCreateRequest;
+import io.qifan.microservice.api.product.request.GoodsQueryRequest;
 import io.qifan.microservice.api.product.request.GoodsUpdateRequest;
 import io.qifan.microservice.api.product.response.GoodsResponse;
+import io.qifan.microservice.common.model.PageResult;
+import io.qifan.microservice.common.model.QueryRequest;
 import io.qifan.microservice.common.model.R;
 import io.qifan.microservice.product.application.GoodsApplicationService;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +42,10 @@ public class GoodsController {
     @PostMapping("findAllById")
     public R<List<GoodsResponse>> findAllById(@RequestBody List<Long> ids) {
         return R.ok(goodsApplicationService.findAllById(ids));
+    }
+
+    @PostMapping("query")
+    public R<PageResult<GoodsResponse>> query(@RequestBody QueryRequest<GoodsQueryRequest> queryRequest) {
+        return R.ok(goodsApplicationService.query(queryRequest));
     }
 }

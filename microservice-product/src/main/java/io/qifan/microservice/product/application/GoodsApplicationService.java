@@ -1,15 +1,20 @@
 package io.qifan.microservice.product.application;
 
 import io.qifan.microservice.api.product.request.GoodsCreateRequest;
+import io.qifan.microservice.api.product.request.GoodsQueryRequest;
 import io.qifan.microservice.api.product.request.GoodsUpdateRequest;
 import io.qifan.microservice.api.product.response.GoodsResponse;
 import io.qifan.microservice.common.constants.ResultCode;
 import io.qifan.microservice.common.exception.BusinessException;
+import io.qifan.microservice.common.model.PageResult;
+import io.qifan.microservice.common.model.QueryRequest;
 import io.qifan.microservice.product.domain.goods.Goods;
 import io.qifan.microservice.product.domain.goods.mapper.GoodsMapper;
 import io.qifan.microservice.product.domain.goods.repository.GoodsRepository;
+import io.qifan.microservice.product.domain.goods.service.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,6 +29,8 @@ public class GoodsApplicationService {
     // @RequiredArgsConstructor + final 会自动注入。
     // 不需要@Autowired
     private final GoodsRepository goodsRepository;
+
+    private final GoodsService goodsService;
 
     public Long create(GoodsCreateRequest createRequest) {
         // MapStruct，GoodsCreateRequest转成Goods(dto-> entity)
@@ -79,5 +86,21 @@ public class GoodsApplicationService {
         return goodsList.stream()
                 .map(GoodsMapper.INSTANCE::entity2Response)
                 .collect(Collectors.toList());
+    }
+
+
+    public PageResult<GoodsResponse> query(QueryRequest<GoodsQueryRequest> queryRequest) {
+        // 将查询请求dto映射为entity
+        Page<Goods> queryResult = goodsService.query(GoodsMapper.INSTANCE.queryRequest2Entity(queryRequest));
+
+        // 这边首先将，entity映射为response。再将page映射为PageResult（因为page里面包含了很多没必要的信息，需要过滤掉）。
+        return PageResult.of(queryResult
+                        .toList()
+                        .stream()
+                        .map(GoodsMapper.INSTANCE::entity2Response)
+                        .collect(Collectors.toList()),
+                queryResult.getTotalElements(),
+                queryResult.getSize(),
+                queryResult.getNumber());
     }
 }

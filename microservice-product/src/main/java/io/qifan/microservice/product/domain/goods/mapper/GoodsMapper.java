@@ -1,8 +1,10 @@
 package io.qifan.microservice.product.domain.goods.mapper;
 
 import io.qifan.microservice.api.product.request.GoodsCreateRequest;
+import io.qifan.microservice.api.product.request.GoodsQueryRequest;
 import io.qifan.microservice.api.product.request.GoodsUpdateRequest;
 import io.qifan.microservice.api.product.response.GoodsResponse;
+import io.qifan.microservice.common.model.QueryRequest;
 import io.qifan.microservice.product.domain.goods.Goods;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -17,4 +19,6 @@ public interface GoodsMapper {
     Goods updateEntityFromUpdateRequest(GoodsUpdateRequest request, @MappingTarget Goods entity);
 
     GoodsResponse entity2Response(Goods entity);
+
+    QueryRequest<Goods> queryRequest2Entity(QueryRequest<GoodsQueryRequest> request);
 }
