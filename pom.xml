@@ -47,6 +47,11 @@
                 <artifactId>queydsl-core</artifactId>
                 <version>${querydsl.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
