@@ -17,4 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.qifan.microservice</groupId>
+            <artifactId>microservice-product-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>

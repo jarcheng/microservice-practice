@@ -37,11 +37,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.qifan.microservice</groupId>
-            <artifactId>microservice-common</artifactId>
-            <version>${revision}</version>
-        </dependency>
+
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
@@ -56,7 +52,17 @@
         </dependency>
         <dependency>
             <groupId>io.qifan.microservice</groupId>
+            <artifactId>microservice-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qifan.microservice</groupId>
             <artifactId>microservice-product-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qifan.microservice</groupId>
+            <artifactId>microservice-order-api</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
