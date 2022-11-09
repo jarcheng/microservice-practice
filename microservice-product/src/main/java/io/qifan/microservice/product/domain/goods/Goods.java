@@ -1,5 +1,7 @@
 package io.qifan.microservice.product.domain.goods;
 
+import io.qifan.microservice.common.constants.ResultCode;
+import io.qifan.microservice.common.exception.BusinessException;
 import io.qifan.microservice.common.jpa.BaseEntity;
 import lombok.Data;
 
@@ -38,4 +40,15 @@ public class Goods extends BaseEntity {
     @NotNull(message = "库存不能为空")
     @Min(value = 0, message = "库存不能为负数")
     private Integer stock;
+
+    public void decrease(Integer count) {
+        stock -= count;
+        if (stock < 0) {
+            throw new BusinessException(ResultCode.UpdateError, "库存不足");
+        }
+    }
+
+    public void increase(Integer count) {
+        stock += count;
+    }
 }

@@ -2,6 +2,7 @@ package io.qifan.microservice.product.application;
 
 import io.qifan.microservice.api.product.request.GoodsCreateRequest;
 import io.qifan.microservice.api.product.request.GoodsQueryRequest;
+import io.qifan.microservice.api.product.request.GoodsStockUpdateRequest;
 import io.qifan.microservice.api.product.request.GoodsUpdateRequest;
 import io.qifan.microservice.api.product.response.GoodsResponse;
 import io.qifan.microservice.common.constants.ResultCode;
@@ -102,5 +103,17 @@ public class GoodsApplicationService {
                 queryResult.getTotalElements(),
                 queryResult.getSize(),
                 queryResult.getNumber());
+    }
+
+    public void increaseStock(List<GoodsStockUpdateRequest> goodsStockUpdateRequests) {
+        goodsStockUpdateRequests.forEach(request -> {
+            goodsService.increaseStock(request.getGoodsId(), request.getCount());
+        });
+    }
+
+    public void decreaseStock(List<GoodsStockUpdateRequest> goodsStockUpdateRequests) {
+        goodsStockUpdateRequests.forEach(request -> {
+            goodsService.decreaseStock(request.getGoodsId(), request.getCount());
+        });
     }
 }
